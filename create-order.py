@@ -100,27 +100,26 @@ def readOrderData(orderCode) -> str:
         print('order created by: ' + result['updated_client'])
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # readOrderData('ZNRHD_PR')
-    createOrderWithThread(100)
+    createOrderWithThread(10000)
 
     # read log
     print('sleep 1')
     time.sleep(5)
 
-    print('loop 1')
-    checkLogWithThread(arr_order)
-    # for orderCode in arr_order:
-    #     readLog(orderCode)
-
-    print('done 1')
+    # print('loop 1')
+    # checkLogWithThread(arr_order)
+    # # for orderCode in arr_order:
+    # #     readLog(orderCode)
+    #
+    # print('done 1')
 
     # read order
-    print('sleep 2')
-    time.sleep(5)
-
-    print('loop 2')
-    checkOrderDataWithThread(arr_order)
-
-    print('done 2')
+    # print('sleep 2')
+    # time.sleep(5)
+    #
+    # print('loop 2')
+    # checkOrderDataWithThread(arr_order)
+    #
+    # print('done 2')
