@@ -1,6 +1,8 @@
 import http.client
 import json
+import time
 from threading import Thread
+import mongo
 
 arr_order = []
 
@@ -57,15 +59,44 @@ def runInThread():
         threads.append(process)
 
 
+def readLog(orderCode):
+    filter = {"data": orderCode}
+    result = mongo.cLog().find_one(filter)
+    if result is None:
+        print('cannot find order: ' + orderCode)
+
+
+def readOrderData(orderCode) -> str:
+    filter = {"order_code": orderCode}
+    result = mongo.cOrder().find_one(filter)
+    if result is None:
+        print('core order not found: ' + orderCode)
+
+    if result['updated_client'] != 'core/online-consumer':
+        print('order created by: ' + result['updated_client'])
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    # readOrderData('ZNRHD_PR')
     runInThread()
-    # for i in range(2):
-    #     createOrder()
 
-    # print("query")
-    #
-    # for o in arr_order:
-    #     queryOrder(o)
-    #
-    # print("done")
+    # read log
+    print('sleep 1')
+    time.sleep(3)
+
+    print('loop 1')
+    for orderCode in arr_order:
+        readLog(orderCode)
+
+    print('done 1')
+
+    # read order
+    print('sleep 2')
+    time.sleep(3)
+
+    print('loop 2')
+    for orderCode in arr_order:
+        readOrderData(orderCode)
+
+    print('done 2')
