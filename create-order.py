@@ -48,13 +48,24 @@ def queryOrder(orderCode):
     # print(data.decode("utf-8"))
 
 
-def runInThread():
+def createOrderWithThread(num):
     # create a list of threads
     threads = []
     # In this case 'urls' is a list of urls to be crawled.
-    for ii in range(1000):
+    for ii in range(num):
         # We start one thread per url present.
         process = Thread(target=createOrder)
+        process.start()
+        threads.append(process)
+
+
+def checkLogWithThread(orders):
+    # create a list of threads
+    threads = []
+    # In this case 'urls' is a list of urls to be crawled.
+    for oo in orders:
+        # We start one thread per url present.
+        process = Thread(target=readLog(oo))
         process.start()
         threads.append(process)
 
@@ -64,6 +75,18 @@ def readLog(orderCode):
     result = mongo.cLog().find_one(filter)
     if result is None:
         print('cannot find order: ' + orderCode)
+    print('log: ', orderCode)
+
+
+def checkOrderDataWithThread(orders):
+    # create a list of threads
+    threads = []
+    # In this case 'urls' is a list of urls to be crawled.
+    for oo in orders:
+        # We start one thread per url present.
+        process = Thread(target=readOrderData(oo))
+        process.start()
+        threads.append(process)
 
 
 def readOrderData(orderCode) -> str:
@@ -71,6 +94,7 @@ def readOrderData(orderCode) -> str:
     result = mongo.cOrder().find_one(filter)
     if result is None:
         print('core order not found: ' + orderCode)
+        return ''
 
     if result['updated_client'] != 'core/online-consumer':
         print('order created by: ' + result['updated_client'])
@@ -79,24 +103,24 @@ def readOrderData(orderCode) -> str:
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # readOrderData('ZNRHD_PR')
-    runInThread()
+    createOrderWithThread(100)
 
     # read log
     print('sleep 1')
-    time.sleep(3)
+    time.sleep(5)
 
     print('loop 1')
-    for orderCode in arr_order:
-        readLog(orderCode)
+    checkLogWithThread(arr_order)
+    # for orderCode in arr_order:
+    #     readLog(orderCode)
 
     print('done 1')
 
     # read order
     print('sleep 2')
-    time.sleep(3)
+    time.sleep(5)
 
     print('loop 2')
-    for orderCode in arr_order:
-        readOrderData(orderCode)
+    checkOrderDataWithThread(arr_order)
 
     print('done 2')
