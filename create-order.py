@@ -102,12 +102,12 @@ def readOrderData(orderCode) -> str:
 
 if __name__ == '__main__':
     # readOrderData('ZNRHD_PR')
-    createOrderWithThread(10000)
+    createOrderWithThread(100)
 
-    # read log
-    print('sleep 1')
-    time.sleep(5)
-
+    # # read log
+    # print('sleep 1')
+    # time.sleep(5)
+    #
     # print('loop 1')
     # checkLogWithThread(arr_order)
     # # for orderCode in arr_order:
@@ -116,10 +116,10 @@ if __name__ == '__main__':
     # print('done 1')
 
     # read order
-    # print('sleep 2')
-    # time.sleep(5)
-    #
-    # print('loop 2')
+    print('sleep 2')
+    # time.sleep(20)
+
+    print('loop 2')
     # checkOrderDataWithThread(arr_order)
-    #
-    # print('done 2')
+
+    print('done 2')
