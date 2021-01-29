@@ -3,6 +3,7 @@ import json
 import time
 from threading import Thread
 import mongo
+import sys
 
 arr_order = []
 
@@ -101,8 +102,8 @@ def readOrderData(orderCode) -> str:
 
 
 if __name__ == '__main__':
-    # readOrderData('ZNRHD_PR')
-    createOrderWithThread(100)
+    numOrder = int(sys.argv[1])
+    createOrderWithThread(numOrder)
 
     # # read log
     # print('sleep 1')
@@ -116,10 +117,10 @@ if __name__ == '__main__':
     # print('done 1')
 
     # read order
-    print('sleep 2')
+    # print('sleep 2')
     # time.sleep(20)
 
-    print('loop 2')
+    # print('loop 2')
     # checkOrderDataWithThread(arr_order)
 
-    print('done 2')
+    # print('done 2')

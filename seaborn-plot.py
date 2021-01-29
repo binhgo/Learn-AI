@@ -30,7 +30,7 @@ def displot():
     sb.distplot(iris['petal_length'], kde=False)
     plt.show()
 
-    
+
 def joinplot():
     iris = sb.load_dataset('iris')
     sb.jointplot(x='petal_length', y='petal_width', data=iris)
@@ -44,9 +44,16 @@ def pairplot():
     plt.show()
 
 
+def stripplot():
+    irisDf = sb.load_dataset('iris')
+    sb.stripplot(data=irisDf, x='species', y='petal_length', jitter=True)
+    plt.show()
+
+
 if __name__ == '__main__':
     sb.set()
-    pairplot()
+    stripplot()
+    # pairplot()
     # joinplot()
     # displot()
     # color()
