@@ -50,9 +50,25 @@ def stripplot():
     plt.show()
 
 
+def barplot():
+    df = sb.load_dataset('titanic')
+    print(df.head())
+    sb.barplot(x="sex", y="survived", hue="alone", data=df)
+    plt.show()
+
+
+def regression():
+    df = sb.load_dataset('tips')
+    sb.regplot(x="total_bill", y="tip", data=df)
+    sb.lmplot(x="total_bill", y="tip", data=df)
+    plt.show()
+
+
 if __name__ == '__main__':
     sb.set()
-    stripplot()
+    regression()
+    # barplot()
+    # stripplot()
     # pairplot()
     # joinplot()
     # displot()
