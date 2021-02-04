@@ -1,5 +1,29 @@
 import asyncio
 import websockets
+import json
+
+USERS = set()
+
+
+def users_event():
+    return json.dumps({"type": "users", "count": len(USERS)})
+
+
+def notify_users():
+    if USERS:
+        message = users_event()
+        abc = [user.send(message) for user in USERS]
+        await asyncio.wait(abc)
+
+
+async def register(websocket):
+    USERS.add(websocket)
+    await notify_users()
+
+
+async def unregister(websocket):
+    USERS.remove(websocket)
+    await notify_users()
 
 
 async def hello(websocket, path):
