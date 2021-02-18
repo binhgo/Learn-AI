@@ -3,6 +3,9 @@ import numpy as np
 
 def testNp1():
     arr = np.arange(15).reshape(3, 5)
+    if arr is not None:
+        print(arr)
+
     print(arr)
     print(arr.shape)
     print(arr.ndim)
