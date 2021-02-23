@@ -2,10 +2,6 @@ import http.client
 import json
 
 
-def sum(a, b):
-    return a + b
-
-
 def array():
     days = ["a", "b", "c", "d", "e"]
     print(days[0:2])
@@ -53,11 +49,33 @@ def createOrder():
     print(jData["data"]["order_code"])
 
 
+def sum(a, b):
+    return a + b
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-    for i in range(1000):
-        createOrder()
+    a = 10
+    b = 20
+    c = sum(a, b)
+    print(c)
+    # a = 1
+    # b = 2
+    # total = a + b
+    # print(total)
+    #
+    # s = 'hello'
+    # print(s)
+
+    # for i in range(10):
+    #     if i % 2 == 0:
+    #         print(i)
+    #     else:
+    #         print('so le: ', i)
+
+    # print_hi('PyCharm')
+    # for i in range(1000):
+    #     createOrder()
     # printLala(False)
     # openFile()
     # array()
