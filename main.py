@@ -1,5 +1,13 @@
 import http.client
 import json
+from ultralytics import YOLO
+
+
+if __name__ == '__main__':
+    model = YOLO("yolov8s.pt")  # load the model
+    results = model.train(data="coco128.yaml", epochs=100)
+    results = model("./image.png")
+
 
 
 def array():
@@ -54,11 +62,13 @@ def sum(a, b):
 
 
 # Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    a = 10
-    b = 20
-    c = sum(a, b)
-    print(c)
+# if __name__ == '__main__':
+#     a = 10
+#     b = 20
+#     c = sum(a, b)
+#     print(c)
+    
+
     # a = 1
     # b = 2
     # total = a + b
