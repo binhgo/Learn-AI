@@ -10,7 +10,7 @@ import numpy as np
 
 HOME = os.getcwd()
 VIDEO_PATH = f"{HOME}/vehicles.mp4"
-RESULT_VIDEO = f"{HOME}/videos/hug-segmentation-result-1.mp4"
+RESULT_VIDEO = f"{HOME}/videos/hug-segmentation-result-2.mp4"
 
 vid_info = sv.VideoInfo.from_video_path(VIDEO_PATH)
 frame_gen = sv.get_video_frames_generator(VIDEO_PATH)
@@ -40,10 +40,15 @@ for frame in tqdm(frame_gen, total=vid_info.total_frames):
     # sv.plot_image(pil_image, size=(8, 8))
 
     results = semantic_segmentation(pil_image)
+    print(results)
 
     overlay = Image.new('RGBA', pil_image.size, (255, 255, 255, 0))
     drawing = ImageDraw.Draw(overlay)
-    drawing.bitmap((0, 0), results[0]['mask'], fill=(255, 0, 0, 128))
+    drawing.bitmap((0, 0), results[0]['mask'], fill=(0, 250, 0, 128))
+    if len(results) >= 13:
+        drawing.bitmap((0, 0), results[12]['mask'], fill=(255, 0, 0, 128))
+    if len(results) >= 14:
+        drawing.bitmap((0, 0), results[13]['mask'], fill=(0, 0, 255, 128))
     final = Image.alpha_composite(pil_image, overlay)
     # sv.plot_image(final, size=(8, 8))
 
