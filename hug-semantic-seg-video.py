@@ -38,7 +38,13 @@ for frame in tqdm(frame_gen, total=vid_info.total_frames):
     color_converted = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     pil_image = Image.fromarray(color_converted).convert('RGBA')
     # sv.plot_image(pil_image, size=(8, 8))
-
+    ##
+    pil_image.crop(self=this, box=)
+    pil_image.filter(self=this, alpha=True)
+    pil_image.copy()
+    pil_image.putalpha()
+    pil_image.getexif(this)
+    ##
     results = semantic_segmentation(pil_image)
     print(results)
 
